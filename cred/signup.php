@@ -2,7 +2,7 @@
 include('./header.php');
 include('../config/index.php');
 
-if ($_POST["uname"] && $_POST["pswrd"]){
+/*if ($_POST["uname"] && $_POST["pswrd"]){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
     $query = "SELECT * FROM USERS WHERE USERNAME=\"" . $user . "\" AND PASSWORD=\"" . $pswrd . "\"";
@@ -13,7 +13,8 @@ if ($_POST["uname"] && $_POST["pswrd"]){
         $final = mysqli_query($query);
         echo "<br/>User registered " . $final;
     //}
-}
+}*/ 
+$result = "";
 ?>
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
     <div class="page-content vertical-align-middle">
@@ -23,11 +24,12 @@ if ($_POST["uname"] && $_POST["pswrd"]){
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
                     <h2 class="brand-text font-size-18">Aman Trading Company</h2>
                 </div>
-                <?php if ($result != ""){ ?>
+                <?php //if ($result != ""){ ?>
                     <div class="alert dark alert-icon alert-<%= color %> alert-dismissible">
                         Data alredy exist. Please try something else.
                     </div>
-                <?php } ?>
+                 
+                ?>
                 <form method="post" action="<?php $_PHP_SELF ?>" autocomplete="off">
                     <!--div class="form-group form-material floating" data-plugin="formMaterial">
                         <input type="text" maxlength="26" required minlength="3" class="form-control" name="name" />
