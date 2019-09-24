@@ -1,3 +1,5 @@
+<?php echo ""; ?>
+
 <footer class="page-copyright">
     <p>WEBSITE MADE BY NIKHIL JAIN</p>
     <p>© 2019. All RIGHT RESERVED.</p>

@@ -1,21 +1,17 @@
 <?php 
-//159001504339
 include('./header.php');
-include('../config/index.php');
 session_start();
-$result = NULL;
-$color = "primary";
-//if ($_SERVER["REQUESTS"] == "POST"){
 
 if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
-    //$user = mysql_real_escape_string($user);
-    //$pwsrd = mysql_real_escape_string($pswrd);
     $query = sprintf("SELECT * FROM USER WHERE USERNAME='%s' AND PASSWORD='%s'", $user, $pswrd);
-    $result = mysqli_query($query);
-    if (mysqli_num_rows($result)> 0)
-        echo $result;
+    $result = mysqli_query($db, $query);
+    if (mysqli_num_rows($result)> 0){
+        setcookie("username", $user, time() + (86400 * 30), "/");
+        header('Location: ../other/index.php');
+    }else
+        $result = NULL;
 }
 
 ?>
@@ -27,6 +23,9 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
                     <h2 class="brand-text font-size-18">AMAN TRADING COMPANY</h2>
                 </div>
+                <?php if ($result == NULL)
+                    echo "<div class=\"alert dark alert-icon alert-warning alert-dismissible\">User Not Exist</div>";
+                ?>
                 <form method="post" action="<?php $_PHP_SELF ?>" autocomplete="off">
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                         <input type="text" required class="form-control" name="uname" />

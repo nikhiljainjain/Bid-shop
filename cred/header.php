@@ -1,3 +1,7 @@
+<?php 
+include('../config/index.php');
+?>
+
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 <head>

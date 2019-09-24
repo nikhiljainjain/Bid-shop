@@ -1,19 +1,17 @@
 <?php 
 include('./header.php');
-include('../config/index.php');
 
-if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
+if (!empty($_POST["uname"]) && !empty($_POST["pswrd"]) && !empty($_POST["name"])){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
-    $query = "SELECT * FROM USERS WHERE USERNAME='". $user . " AND PASSWORD='" . $pswrd."'";
+    $name = $_POST["name"];
+    $query = sprintf("INSERT IGNORE INTO USER VALUES ('%s', '%s', '%s')", $user, $name, $pswrd);
     $result = mysqli_query($db, $query);
-    //if ($result == ""){
-        $query = sprintf("INSERT INTO USER VALUES ('%s', '%s')", $user, $pswrd);
-        $final = mysqli_query($db, $query);
-        echo "<br/>User registered " . $final;
-    //}
+    if ($result == 1){
+        setcookie("username", $user, time() + (86400 * 30), "/");
+        header('Location: ../other/index.php');
+    }
 }
-//$result = "";
 ?>
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
     <div class="page-content vertical-align-middle">
@@ -23,17 +21,15 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
                     <h2 class="brand-text font-size-18">Aman Trading Company</h2>
                 </div>
-                <?php if ($result != ""){ ?>
-                    <div class="alert dark alert-icon alert-<%= color %> alert-dismissible">
-                        Data alredy exist. Please try something else.
-                    </div>
-                 
+                <?php 
+                    if ($result != 1)
+                        echo "<div class=\"alert dark alert-icon alert-warning alert-dismissible\">Something happening wrong</div>";
                 ?>
                 <form method="post" action="<?php $_PHP_SELF ?>" autocomplete="off">
-                    <!--div class="form-group form-material floating" data-plugin="formMaterial">
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
                         <input type="text" maxlength="26" required minlength="3" class="form-control" name="name" />
                         <label class="floating-label">Name</label>
-                    </div-->
+                    </div>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                         <input type="text" maxlength="26" required minlength="4" class="form-control" name="uname" />
                         <label class="floating-label">UserName</label>
@@ -49,6 +45,6 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
             </div>
         </div>
 <?php 
-include('./footer.php');
+ include('footer.php');
 ?>
  
