@@ -3,15 +3,19 @@
 include('./header.php');
 include('../config/index.php');
 session_start();
+$result = NULL;
+$color = "primary";
+//if ($_SERVER["REQUESTS"] == "POST"){
 
-if ($_POST["uname"] && $_POST["pswrd"]){
+if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
-    $user = mysql_real_escape_string($user);
-    $pwsrd = mysql_real_escape_string($pswrd);
-    $query = sprintf("SELECT * FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", $user, $pswrd);
-    $result = mysql_query($query);
-    echo $result;
+    //$user = mysql_real_escape_string($user);
+    //$pwsrd = mysql_real_escape_string($pswrd);
+    $query = sprintf("SELECT * FROM USER WHERE USERNAME='%s' AND PASSWORD='%s'", $user, $pswrd);
+    $result = mysqli_query($query);
+    if (mysqli_num_rows($result)> 0)
+        echo $result;
 }
 
 ?>
@@ -23,14 +27,9 @@ if ($_POST["uname"] && $_POST["pswrd"]){
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
                     <h2 class="brand-text font-size-18">AMAN TRADING COMPANY</h2>
                 </div>
-                <!-- if (msg){ %>
-                    <div class="alert dark alert-icon alert-<%= color %> alert-dismissible">
-                        <%= msg %>!!!
-                    </div>
-                <% } -->
                 <form method="post" action="<?php $_PHP_SELF ?>" autocomplete="off">
                     <div class="form-group form-material floating" data-plugin="formMaterial">
-                        <input type="text" required class="form-control" name="uame" />
+                        <input type="text" required class="form-control" name="uname" />
                         <label class="floating-label">UserName</label>
                     </div>
                     <div class="form-group form-material floating" data-plugin="formMaterial">

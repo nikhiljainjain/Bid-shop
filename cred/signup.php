@@ -2,19 +2,18 @@
 include('./header.php');
 include('../config/index.php');
 
-/*if ($_POST["uname"] && $_POST["pswrd"]){
+if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
-    $query = "SELECT * FROM USERS WHERE USERNAME=\"" . $user . "\" AND PASSWORD=\"" . $pswrd . "\"";
-    $result = mysqli_query($query, $db);
-    echo $query . "<br/>something happening" . $result . " x";
+    $query = "SELECT * FROM USERS WHERE USERNAME='". $user . " AND PASSWORD='" . $pswrd."'";
+    $result = mysqli_query($db, $query);
     //if ($result == ""){
-        $query = sprintf("INSERT INTO USERS VALUES ('%s', '%s')", $user, $pswrd);
-        $final = mysqli_query($query);
+        $query = sprintf("INSERT INTO USER VALUES ('%s', '%s')", $user, $pswrd);
+        $final = mysqli_query($db, $query);
         echo "<br/>User registered " . $final;
     //}
-}*/ 
-$result = "";
+}
+//$result = "";
 ?>
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
     <div class="page-content vertical-align-middle">
@@ -24,7 +23,7 @@ $result = "";
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
                     <h2 class="brand-text font-size-18">Aman Trading Company</h2>
                 </div>
-                <?php //if ($result != ""){ ?>
+                <?php if ($result != ""){ ?>
                     <div class="alert dark alert-icon alert-<%= color %> alert-dismissible">
                         Data alredy exist. Please try something else.
                     </div>
