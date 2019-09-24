@@ -1,5 +1,8 @@
 <?php 
 include('../config/index.php');
+if (isset($_COOKIE["username"])){
+    header("Location:../other/index.php");
+}
 ?>
 
 <!DOCTYPE html>
