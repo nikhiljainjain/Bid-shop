@@ -1,6 +1,8 @@
 <?php 
 include('./header.php');
 
+//filtertion for alphanumeric username only
+
 if (!empty($_POST["uname"]) && !empty($_POST["pswrd"]) && !empty($_POST["name"])){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
@@ -19,7 +21,7 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"]) && !empty($_POST["name"])
             <div class="panel-body">
                 <div class="brand">
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
-                    <h2 class="brand-text font-size-18">Aman Trading Company</h2>
+                    <h2 class="brand-text font-size-18"><?php echo $site_name; ?></h2>
                 </div>
                 <?php 
                     if ($result != 1)

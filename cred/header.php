@@ -14,7 +14,7 @@ if (isset($_COOKIE["username"])){
     <meta name="description" content="bootstrap material admin template">
     <meta name="author" content="">
 
-    <title>NAKHRE PRACTICE</title>
+    <title><?php echo $site_name; ?></title>
 
     <link rel="apple-touch-icon" href="./remark/assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="./remark/assets/images/favicon.ico">

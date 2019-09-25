@@ -21,7 +21,7 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
             <div class="panel-body">
                 <div class="brand">
                     <img class="brand-img" src="/remark/assets/images/logo-colored.png" alt="...">
-                    <h2 class="brand-text font-size-18">AMAN TRADING COMPANY</h2>
+                    <h2 class="brand-text font-size-18"><?php echo $site_name; ?></h2>
                 </div>
                 <?php if ($result == NULL)
                     echo "<div class=\"alert dark alert-icon alert-warning alert-dismissible\">User Not Exist</div>";
@@ -37,7 +37,7 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
                     </div>
                     <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
                 </form>
-                <p>Still no account? Please go to <a href="./signup.php">Sign up</a></p>
+                <p>Still no account? Please go to <a href="signup.php">Sign up</a></p>
                 <a class="btn btn-primary btn-block btn-lg mt-40" href="/">Go To Home Page</a>
             </div>
         </div>
