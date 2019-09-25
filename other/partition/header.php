@@ -1,6 +1,5 @@
 <?php
 include("../config/index.php");
-session_start();
 if (!isset($_COOKIE["username"]))
     header("Location:../cred/index.php");
 ?>

@@ -1,5 +1,5 @@
 <?php 
-include('../config/index.php');
+include('../config/new_table.php');
 if (isset($_COOKIE["username"])){
     header("Location:../other/index.php");
 }

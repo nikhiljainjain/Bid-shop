@@ -5,14 +5,17 @@ if (!empty($_POST["pname"]) && !empty($_POST["pprice"]) &&!empty($_POST["pedate"
     $ppname = $_POST["pname"];
     $pprice = $_POST["pprice"];
     $pedate = $_POST["pedate"];
-    $pdescp = $_POST["pdescp"];//STR_TO_DATE('s', '%Y/%m/%d')
+    $pdescp = $_POST["pdescp"];
     $owner = $_COOKIE["username"];
-    $query = "INSERT INTO ITEMS (PNAME, PPRICE, PDESCP, OWNER, EXIT_TIME) VALUES (\"$ppname\", \"$pprice\", \"$pdescp\", \"$owner\", \"$pedate\")";
-    $result = mysqli_query($db, $query);
-    if ($result == 1)
-       echo "<div role=\"alert\" class=\"alert alert-success\">Product added successfully</div>"; 
-    else
-        echo "<div role=\"alert\" class=\"alert alert-warning\">Something happening wrong. Please try again later. $pedate</div>";
+    if ((new DateTime() < new DateTime($pedate)) == 1){
+       $query = "INSERT INTO ITEMS (PNAME, PPRICE, PDESCP, OWNER, EXIT_TIME) VALUES (\"$ppname\", \"$pprice\", \"$pdescp\", \"$owner\", \"$pedate\")";
+        $result = mysqli_query($db, $query);
+        if ($result == 1)
+            echo "<div role=\"alert\" class=\"alert alert-success\">Product added successfully</div>"; 
+        else
+            echo "<div role=\"alert\" class=\"alert alert-warning\">Something happening wrong. Please try again later.</div>"; 
+    }else
+        echo "<div role=\"alert\" class=\"alert alert-warning\">Invalid Date. Please Enter future Date</div>";
 }else if ($_SERVER["REQUEST_METHOD"] == "POST"){
     echo "<div role=\"alert\" class=\"alert alert-warning\">Something is missing</div>";
     if (empty($_POST["pname"]))

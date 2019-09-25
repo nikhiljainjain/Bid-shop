@@ -1,6 +1,5 @@
 <?php 
 include('./header.php');
-session_start();
 
 if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
     $user = $_POST["uname"];
