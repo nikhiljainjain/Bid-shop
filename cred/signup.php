@@ -7,12 +7,15 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"]) && !empty($_POST["name"])
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
     $name = $_POST["name"];
-    $query = sprintf("INSERT IGNORE INTO USER VALUES ('%s', '%s', '%s')", $user, $name, $pswrd);
-    $result = mysqli_query($db, $query);
-    if ($result == 1){
-        setcookie("username", $user, time() + (86400 * 30), "/");
-        header('Location: ../other/index.php');
-    }
+    if(!preg_match('/[^a-z_\-0-9]/i', $user)){
+        $query = sprintf("INSERT IGNORE INTO USER VALUES ('%s', '%s', '%s')", $user, $name, $pswrd);
+        $result = mysqli_query($db, $query);
+        if ($result == 1){
+            setcookie("username", $user, time() + (86400 * 30), "/");
+            header('Location: ../other/index.php');
+        }   
+    }else
+        $result = 0;
 }
 ?>
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
@@ -40,7 +43,7 @@ if (!empty($_POST["uname"]) && !empty($_POST["pswrd"]) && !empty($_POST["name"])
                         <input type="password" maxlength="26" required minlength="4" class="form-control" name="pswrd" />
                         <label class="floating-label">Password</label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-40">Sign-Up</button>
                 </form>
                 <p>Alredy User<a href="./login.php"> Login</a></p>
                 <a class="btn btn-primary btn-block btn-lg mt-40" href="/">Go To Home Page</a>

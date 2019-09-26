@@ -4,13 +4,17 @@ include('./header.php');
 if (!empty($_POST["uname"]) && !empty($_POST["pswrd"])){
     $user = $_POST["uname"];
     $pswrd = $_POST["pswrd"];
-    $query = sprintf("SELECT * FROM USER WHERE USERNAME='%s' AND PASSWORD='%s'", $user, $pswrd);
-    $result = mysqli_query($db, $query);
-    if (mysqli_num_rows($result)> 0){
-        setcookie("username", $user, time() + (86400 * 30), "/");
-        header('Location: ../other/index.php');
+    
+    if(!preg_match('/[^a-z_\-0-9]/i', $user)){
+        $query = sprintf("SELECT * FROM USER WHERE USERNAME='%s' AND PASSWORD='%s'", $user, $pswrd);
+        $result = mysqli_query($db, $query);
+        if (mysqli_num_rows($result)> 0){
+            setcookie("username", $user, time() + (86400 * 30), "/");
+            header('Location: ../other/index.php');
+        }else
+            $result = NULL;
     }else
-        $result = NULL;
+        $result = 0;
 }
 
 ?>
